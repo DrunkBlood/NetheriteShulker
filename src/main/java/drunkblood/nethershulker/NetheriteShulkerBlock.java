@@ -22,9 +22,7 @@ import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -46,18 +44,23 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.minecraft.world.level.block.ShulkerBoxBlock.CONTENTS;
 
-//TODO add color
 public class NetheriteShulkerBlock extends Block implements EntityBlock {
     public static final String SHULKER_SCREEN_NAME = "screen.nethershulker.shulker";
+    private final DyeColor color;
 
     public NetheriteShulkerBlock(Properties properties) {
+        this(null, properties);
+    }
+
+    public NetheriteShulkerBlock(@Nullable DyeColor color, Properties properties){
         super(properties);
+        this.color = color;
     }
 
     @Nullable
@@ -86,10 +89,9 @@ public class NetheriteShulkerBlock extends Block implements EntityBlock {
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState blockState, Player player) {
         BlockEntity blockentity = level.getBlockEntity(pos);
-        if (blockentity instanceof NetheriteShulkerBlockEntity) {
-            NetheriteShulkerBlockEntity shulkerboxblockentity = (NetheriteShulkerBlockEntity)blockentity;
+        if (blockentity instanceof NetheriteShulkerBlockEntity shulkerboxblockentity) {
             if (!level.isClientSide && player.isCreative() && !shulkerboxblockentity.isEmpty()) {
-                ItemStack itemstack = new ItemStack(NetheriteShulker.NETHERITE_SHULKER.get());
+                ItemStack itemstack = getColoredItemStack(shulkerboxblockentity.getColor());
                 blockentity.saveToItem(itemstack);
 
                 ItemEntity itementity = new ItemEntity(level, (double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, itemstack);
@@ -296,5 +298,65 @@ public class NetheriteShulkerBlock extends Block implements EntityBlock {
             }
         }
 
+    }
+
+    public static DyeColor getColorFromBlock(Block block) {
+        return block instanceof NetheriteShulkerBlock ? ((NetheriteShulkerBlock)block).getColor() : null;
+    }
+
+    @javax.annotation.Nullable
+    public static DyeColor getColorFromItem(Item item) {
+        return getColorFromBlock(Block.byItem(item));
+    }
+
+    public static Block getBlockByColor(@javax.annotation.Nullable DyeColor dyeColor) {
+        if (dyeColor == null) {
+            return ModBlocks.NETHERITE_SHULKER_DEFAULT.get();
+        } else {
+            switch(dyeColor) {
+                case WHITE:
+                    return ModBlocks.NETHERITE_SHULKER_WHITE.get();
+                case ORANGE:
+                    return ModBlocks.NETHERITE_SHULKER_ORANGE.get();
+                case MAGENTA:
+                    return ModBlocks.NETHERITE_SHULKER_MAGENTA.get();
+                case LIGHT_BLUE:
+                    return ModBlocks.NETHERITE_SHULKER_LIGHT_BLUE.get();
+                case YELLOW:
+                    return ModBlocks.NETHERITE_SHULKER_YELLOW.get();
+                case LIME:
+                    return ModBlocks.NETHERITE_SHULKER_LIME.get();
+                case PINK:
+                    return ModBlocks.NETHERITE_SHULKER_PINK.get();
+                case GRAY:
+                    return ModBlocks.NETHERITE_SHULKER_GRAY.get();
+                case LIGHT_GRAY:
+                    return ModBlocks.NETHERITE_SHULKER_LIGHT_GRAY.get();
+                case CYAN:
+                    return ModBlocks.NETHERITE_SHULKER_CYAN.get();
+                case PURPLE:
+                default:
+                    return ModBlocks.NETHERITE_SHULKER_PURPLE.get();
+                case BLUE:
+                    return ModBlocks.NETHERITE_SHULKER_BLUE.get();
+                case BROWN:
+                    return ModBlocks.NETHERITE_SHULKER_BROWN.get();
+                case GREEN:
+                    return ModBlocks.NETHERITE_SHULKER_GREEN.get();
+                case RED:
+                    return ModBlocks.NETHERITE_SHULKER_RED.get();
+                case BLACK:
+                    return ModBlocks.NETHERITE_SHULKER_BLACK.get();
+            }
+        }
+    }
+
+    public static ItemStack getColoredItemStack(@Nullable DyeColor dyeColor) {
+        return new ItemStack(getBlockByColor(dyeColor));
+    }
+
+    @Nullable
+    public DyeColor getColor() {
+        return color;
     }
 }

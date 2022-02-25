@@ -13,6 +13,7 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -45,9 +46,15 @@ public class NetheriteShulkerBlockEntity extends BlockEntity {
     private float progress;
     private float progressOld;
     private Component name;
+    private final DyeColor color;
 
+    public NetheriteShulkerBlockEntity(DyeColor dyeColor, BlockPos pos, BlockState blockState) {
+        super(NetheriteShulker.NETHERITE_SHULKER_BLOCK_ENTITY.get(), pos, blockState);
+        color = dyeColor;
+    }
     public NetheriteShulkerBlockEntity(BlockPos pos, BlockState blockState) {
         super(NetheriteShulker.NETHERITE_SHULKER_BLOCK_ENTITY.get(), pos, blockState);
+        color =  NetheriteShulkerBlock.getColorFromBlock(blockState.getBlock());
     }
 
     public LazyOptional<IItemHandler> getHandler() {
@@ -251,6 +258,10 @@ public class NetheriteShulkerBlockEntity extends BlockEntity {
         this.name = hoverName;
     }
 
+    @Nullable
+    public DyeColor getColor() {
+        return color;
+    }
 
     public static enum AnimationStatus {
         CLOSED,

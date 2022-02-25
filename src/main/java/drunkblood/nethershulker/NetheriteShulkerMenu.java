@@ -44,7 +44,7 @@ public class NetheriteShulkerMenu extends AbstractContainerMenu {
                 blockEntity.getLevel(),
                 blockEntity.getBlockPos()),
                 playerEntity,
-                NetheriteShulker.NETHERITE_SHULKER.get());
+                blockEntity.getBlockState().getBlock());
     }
 
     @Override
