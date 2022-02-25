@@ -7,27 +7,27 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class NetheriteShulkerContainer extends AbstractContainerMenu {
-
-    private final BlockEntity blockEntity;
+public class NetheriteShulkerMenu extends AbstractContainerMenu {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private final NetheriteShulkerBlockEntity blockEntity;
     private final Player player;
     private final IItemHandler playerInventory;
 
-    public NetheriteShulkerContainer(int windowId, BlockPos pos, Inventory inv, Player player) {
+    public NetheriteShulkerMenu(int windowId, BlockPos pos, Inventory inv, Player player) {
         super(NetheriteShulker.NETHERITE_SHULKER_CONTAINER.get(), windowId);
-        blockEntity = player.getCommandSenderWorld().getBlockEntity(pos);
+        blockEntity = (NetheriteShulkerBlockEntity) player.getCommandSenderWorld().getBlockEntity(pos);
         this.player = player;
         playerInventory = new InvWrapper(inv);
 
         if(blockEntity != null){
+            if(!player.level.isClientSide()) blockEntity.startOpen(player);
             blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h ->
                     addSlotBox(h, 0, 8, 18, 9, 18, 3, 18));
         }
@@ -48,46 +48,35 @@ public class NetheriteShulkerContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
-        // TODO change
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
-            ItemStack stack = slot.getItem();
-            itemstack = stack.copy();
-            if (index == 0) {
-                if (!this.moveItemStackTo(stack, 1, 37, true)) {
+            ItemStack itemstack1 = slot.getItem();
+            itemstack = itemstack1.copy();
+            if (index < 27) {
+                if (!this.moveItemStackTo(itemstack1, 27, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-                slot.onQuickCraft(stack, itemstack);
-            } else {
-                if (ForgeHooks.getBurnTime(stack, RecipeType.SMELTING) > 0) {
-                    if (!this.moveItemStackTo(stack, 0, 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index < 28) {
-                    if (!this.moveItemStackTo(stack, 28, 37, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index < 37 && !this.moveItemStackTo(stack, 1, 28, false)) {
-                    return ItemStack.EMPTY;
-                }
+            } else if (!this.moveItemStackTo(itemstack1, 0, 27, false)) {
+                return ItemStack.EMPTY;
             }
 
-            if (stack.isEmpty()) {
+            if (itemstack1.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
-
-            if (stack.getCount() == itemstack.getCount()) {
-                return ItemStack.EMPTY;
-            }
-
-            slot.onTake(playerIn, stack);
         }
 
         return itemstack;
+    }
+
+    // onClose startOpen from ShulkerBoxBlockEntity
+    @Override
+    public void removed(Player player) {
+        blockEntity.stopOpen(player);
+        super.removed(player);
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {

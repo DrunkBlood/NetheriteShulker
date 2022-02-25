@@ -1,6 +1,8 @@
 package drunkblood.nethershulker;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -29,6 +31,8 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.function.Consumer;
 
@@ -37,6 +41,7 @@ import static drunkblood.nethershulker.NetheriteShulkerBlock.SHULKER_SCREEN_NAME
 @Mod(NetheriteShulker.MODID)
 public class NetheriteShulker {
     public static final String MODID = "nethershulker";
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS =
@@ -62,9 +67,9 @@ public class NetheriteShulker {
             NETHERITE_SHULKER_REGISTRY_NAME,
             () -> BlockEntityType.Builder.of(NetheriteShulkerBlockEntity::new, NETHERITE_SHULKER.get()).build(null)
     );
-    public static final RegistryObject<MenuType<NetheriteShulkerContainer>> NETHERITE_SHULKER_CONTAINER = CONTAINERS.register(
+    public static final RegistryObject<MenuType<NetheriteShulkerMenu>> NETHERITE_SHULKER_CONTAINER = CONTAINERS.register(
             NETHERITE_SHULKER_REGISTRY_NAME,
-            () -> IForgeMenuType.create(((windowId, inv, data) -> new NetheriteShulkerContainer(windowId, data.readBlockPos(), inv, inv.player)))
+            () -> IForgeMenuType.create(((windowId, inv, data) -> new NetheriteShulkerMenu(windowId, data.readBlockPos(), inv, inv.player)))
     );
 
     public NetheriteShulker(){
@@ -93,7 +98,8 @@ public class NetheriteShulker {
     public void clientSetup(FMLClientSetupEvent event){
         event.enqueueWork(() -> {
             MenuScreens.register(NETHERITE_SHULKER_CONTAINER.get(), NetheriteShulkerScreen::new);
-//            ItemBlockRenderTypes.setRenderLayer(NETHERITE_SHULKER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(NETHERITE_SHULKER.get(), RenderType.translucent());
+            NetheriteShulkerRenderer.register();
         });
     }
 

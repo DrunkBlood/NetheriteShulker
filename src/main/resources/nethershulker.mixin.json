@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "drunkblood.nethershulker.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "nethershulker.refmap.json",
+  "mixins": [
+    "MixinShulkerBoxBlockEntity",
+    "MixinBlockItem"
+  ],
+  "minVersion": "0.8"
+}

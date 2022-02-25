@@ -7,9 +7,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class NetheriteShulkerScreen extends AbstractContainerScreen<NetheriteShulkerContainer> {
+public class NetheriteShulkerScreen extends AbstractContainerScreen<NetheriteShulkerMenu> {
     private final ResourceLocation GUI = new ResourceLocation(NetheriteShulker.MODID, "textures/gui/shulker_gui.png");
-    public NetheriteShulkerScreen(NetheriteShulkerContainer container, Inventory inv, Component name) {
+    public NetheriteShulkerScreen(NetheriteShulkerMenu container, Inventory inv, Component name) {
         super(container, inv, name);
     }
 
