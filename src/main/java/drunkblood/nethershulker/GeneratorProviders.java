@@ -102,24 +102,6 @@ public class GeneratorProviders {
         }
     }
 
-    static class ModRecipes extends RecipeProvider {
-
-        public ModRecipes(DataGenerator generator) {
-            super(generator);
-        }
-
-        // TODO add recipes
-        @Override
-        protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-            Ingredient base = Ingredient.of(Items.DIAMOND); // TODO change to shulker
-            Ingredient addition = Ingredient.of(Items.NETHERITE_INGOT);
-            Item result = ModItems.NETHERITE_SHULKER_DEFAULT.get();
-            UpgradeRecipeBuilder.smithing(base,addition,result)
-                    .unlocks("has_netherite_ingot", RecipeProvider.has(Items.NETHERITE_INGOT))
-                    .save(consumer, "netherite_shulker_smithing");
-        }
-    }
-
     static class ModLootTables extends BaseLootTableProvider {
 
         public ModLootTables(DataGenerator generator) {

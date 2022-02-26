@@ -80,7 +80,7 @@ public class NetheriteShulkerBlock extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> p_153214_) {
         return (lvl, pos, blockState, t) -> {
-            if (t instanceof NetheriteShulkerBlockEntity tile) {
+            if (t instanceof NetheriteShulkerBlockEntity tile && state.getBlock() instanceof NetheriteShulkerBlock) {
                 tile.tick(lvl, pos, blockState, tile);
             }
         };
