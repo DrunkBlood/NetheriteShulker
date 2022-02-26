@@ -32,7 +32,6 @@ import java.util.Set;
 
 import static net.minecraft.client.renderer.Sheets.SHULKER_SHEET;
 
-//TODO invalid for ticking onRemoved
 @Mod(NetheriteShulker.MODID)
 public class NetheriteShulker {
     public static final String MODID = "nethershulker";
