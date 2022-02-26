@@ -110,8 +110,8 @@ public class NetheriteShulkerBlock extends Block implements EntityBlock {
             if(blockentity instanceof NetheriteShulkerBlockEntity){
                 level.updateNeighbourForOutputSignal(pos, blockState.getBlock());
             }
-            super.onRemove(blockState, level, pos, blockState1, b);
         }
+        super.onRemove(blockState, level, pos, blockState1, b);
     }
 
     @Override
