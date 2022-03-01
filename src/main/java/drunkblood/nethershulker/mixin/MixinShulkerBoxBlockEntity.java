@@ -1,6 +1,6 @@
 package drunkblood.nethershulker.mixin;
 
-import drunkblood.nethershulker.NetheriteShulkerBlock;
+import drunkblood.nethershulker.block.NetheriteShulkerBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;

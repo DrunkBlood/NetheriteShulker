@@ -1,5 +1,8 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.block;
 
+import drunkblood.nethershulker.NetheriteShulker;
+import drunkblood.nethershulker.render.NetheriteShulkerMenu;
+import drunkblood.nethershulker.blockentity.NetheriteShulkerBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

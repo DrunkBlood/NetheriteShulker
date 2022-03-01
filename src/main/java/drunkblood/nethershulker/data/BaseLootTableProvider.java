@@ -1,4 +1,4 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.data;
 
 
 import com.google.gson.Gson;

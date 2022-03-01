@@ -1,24 +1,18 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.recipe;
 
 import com.google.gson.JsonObject;
+import drunkblood.nethershulker.NetheriteShulker;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraftforge.items.ItemStackHandler;
-
-import java.util.stream.Stream;
 
 public class NetheriteShulkerUpgradeRecipe extends UpgradeRecipe {
 
@@ -50,7 +44,7 @@ public class NetheriteShulkerUpgradeRecipe extends UpgradeRecipe {
                         NonNullList<ItemStack> itemStacks = NonNullList.withSize(27, ItemStack.EMPTY);
                         for(int i = 0; i < items.size(); ++i) {
                             CompoundTag itemTag = items.getCompound(i);
-                            int j = sourceTag.getByte("Slot") & 255;
+                            int j = itemTag.getByte("Slot") & 255;
                             if (j >= 0 && j < 27) {
                                 itemStacks.set(j, ItemStack.of(itemTag));
                             }

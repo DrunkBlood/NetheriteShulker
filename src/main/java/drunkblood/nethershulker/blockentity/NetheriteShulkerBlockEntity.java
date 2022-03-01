@@ -1,5 +1,7 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.blockentity;
 
+import drunkblood.nethershulker.NetheriteShulker;
+import drunkblood.nethershulker.block.NetheriteShulkerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -36,7 +38,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static drunkblood.nethershulker.NetheriteShulkerBlock.SHULKER_SCREEN_NAME;
+import static drunkblood.nethershulker.block.NetheriteShulkerBlock.SHULKER_SCREEN_NAME;
 
 public class NetheriteShulkerBlockEntity extends BlockEntity {
     private final ItemStackHandler itemHandler = createHandler();

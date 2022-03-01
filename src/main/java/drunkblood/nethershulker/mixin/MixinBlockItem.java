@@ -1,6 +1,6 @@
 package drunkblood.nethershulker.mixin;
 
-import drunkblood.nethershulker.NetheriteShulkerBlock;
+import drunkblood.nethershulker.block.NetheriteShulkerBlock;
 import net.minecraft.world.item.BlockItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

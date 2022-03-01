@@ -1,6 +1,9 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import drunkblood.nethershulker.block.ModBlocks;
+import drunkblood.nethershulker.block.NetheriteShulkerBlock;
+import drunkblood.nethershulker.blockentity.NetheriteShulkerBlockEntity;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

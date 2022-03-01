@@ -1,8 +1,11 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.render;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import drunkblood.nethershulker.NetheriteShulker;
+import drunkblood.nethershulker.block.NetheriteShulkerBlock;
+import drunkblood.nethershulker.blockentity.NetheriteShulkerBlockEntity;
 import net.minecraft.client.model.ShulkerModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;

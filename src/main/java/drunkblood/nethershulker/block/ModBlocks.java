@@ -1,5 +1,6 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.block;
 
+import drunkblood.nethershulker.NetheriteShulker;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

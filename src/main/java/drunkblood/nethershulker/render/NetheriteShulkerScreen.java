@@ -1,7 +1,9 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import drunkblood.nethershulker.NetheriteShulker;
+import drunkblood.nethershulker.render.NetheriteShulkerMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

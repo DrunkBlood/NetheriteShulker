@@ -1,5 +1,7 @@
-package drunkblood.nethershulker;
+package drunkblood.nethershulker.recipe;
 
+import drunkblood.nethershulker.NetheriteShulker;
+import drunkblood.nethershulker.block.NetheriteShulkerBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
