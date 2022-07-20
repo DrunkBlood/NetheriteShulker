@@ -68,7 +68,7 @@ public class NetheriteShulkerUpgradeRecipe extends UpgradeRecipe {
         return super.getSerializer();
     }
 
-    public static class Serializer extends net.minecraftforge.registries.ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<NetheriteShulkerUpgradeRecipe> {
+    public static class Serializer implements RecipeSerializer<NetheriteShulkerUpgradeRecipe> {
         public NetheriteShulkerUpgradeRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "base"));
             Ingredient ingredient1 = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "addition"));

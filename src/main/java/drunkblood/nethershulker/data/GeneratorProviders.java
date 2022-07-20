@@ -14,6 +14,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static drunkblood.nethershulker.block.NetheriteShulkerBlock.SHULKER_SCREEN_NAME;
 
@@ -60,10 +61,10 @@ public class GeneratorProviders {
         protected void registerModels() {
             String template_shulker_box = "item/template_netherite_shulker";
             withExistingParent(NetheriteShulker.NETHERITE_SHULKER_REGISTRY_NAME, modLoc(template_shulker_box))
-                    .texture("particle", modLoc("block/" + ModItems.NETHERITE_SHULKER_DEFAULT.get().getRegistryName().getPath()));
+                    .texture("particle", modLoc("block/" + ForgeRegistries.ITEMS.getKey(ModItems.NETHERITE_SHULKER_DEFAULT.get()).getPath()));
             for (DyeColor dyeColor : DyeColor.values()){
                 Block block = NetheriteShulkerBlock.getBlockByColor(dyeColor);
-                String name = block.getRegistryName().getPath();
+                String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
                 withExistingParent(name, modLoc(template_shulker_box))
                         .texture("particle", modLoc("block/" + name));
             }
@@ -86,7 +87,7 @@ public class GeneratorProviders {
                             NetheriteShulker.NETHERITE_SHULKER_BLOCK_ENTITY.get()));
             for (DyeColor dyeColor : DyeColor.values()){
                 Block block = NetheriteShulkerBlock.getBlockByColor(dyeColor);
-                ResourceLocation regName = block.getRegistryName();
+                ResourceLocation regName = ForgeRegistries.BLOCKS.getKey(block);
                 lootTables.put(block,
                         createStandardTable(
                                 regName.getPath(),

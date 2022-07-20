@@ -30,6 +30,7 @@ public class NetheriteShulkerItemRender extends BlockEntityWithoutLevelRenderer 
     private static final NetheriteShulkerBlockEntity DEFAULT_SHULKER_BOX = new NetheriteShulkerBlockEntity(null, BlockPos.ZERO, ModBlocks.NETHERITE_SHULKER_DEFAULT.get().defaultBlockState());
     @Override
     public void renderByItem(ItemStack itemStack, ItemTransforms.TransformType transformType, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int i1) {
+
         if(itemStack.getItem() instanceof BlockItem blockItem){
             DyeColor dyeColor = NetheriteShulkerBlock.getColorFromItem(blockItem);
             BlockEntity blockEntity;

@@ -11,7 +11,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -156,7 +155,7 @@ public class NetheriteShulkerBlock extends Block implements EntityBlock {
                             return new NetheriteShulkerMenu(windowId, blockPos, inv, player1);
                         }
                     };
-                    NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
+                    NetworkHooks.openScreen((ServerPlayer) player, containerProvider, be.getBlockPos());
                     player.awardStat(Stats.OPEN_SHULKER_BOX);
                     PiglinAi.angerNearbyPiglins(player, true);
                 }
@@ -296,7 +295,7 @@ public class NetheriteShulkerBlock extends Block implements EntityBlock {
                 }
 
                 if (j - i > 0) {
-                    componentList.add((new TranslatableComponent("container.shulkerBox.more", j - i)).withStyle(ChatFormatting.ITALIC));
+                    componentList.add(Component.translatable("container.shulkerBox.more", j - i).withStyle(ChatFormatting.ITALIC));
                 }
             }
         }
